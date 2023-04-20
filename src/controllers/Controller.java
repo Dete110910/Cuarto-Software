@@ -1,8 +1,10 @@
 package controllers;
 
+import models.Partition;
 import models.ProcessManager;
 import views.Utilities;
 import views.ViewManager;
+import models.Process;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -31,6 +33,12 @@ public class Controller implements ActionListener, KeyListener {
             case "CancelarParticion":
                 this.cancelAddPartition();
                 break;
+            case "CrearProceso":
+                this.showCreateProcessDialog();
+                break;
+            case "AñadirProceso":
+                this.confirmAddProcess();
+                break;
         }
     }
 
@@ -47,13 +55,38 @@ public class Controller implements ActionListener, KeyListener {
             this.processManager.addPartition(partitionName, partitionSize);
             this.viewManager.cleanFieldsPartitionDialog();
         }
-
-        System.out.println( this.processManager.getPartitions());
-
     }
 
     private void cancelAddPartition(){
         this.viewManager.hideCreatePartitionsDialog();
+    }
+
+    private void showCreateProcessDialog(){
+        this.viewManager.showCreateProcessDialog();
+    }
+
+    private void confirmAddProcess(){
+        String processName = this.viewManager.getProcessName();
+        BigInteger timeProcess = this.viewManager.getProcessTime();
+        BigInteger sizeProcess = this.viewManager.getProcessSize();
+        boolean isBlock = this.viewManager.isBlock();
+        Partition partition = this.processManager.getPartitionByName(this.viewManager.getSelectedPartition());
+
+        if(this.processManager.isAlreadyName(processName)){
+            Utilities.showErrorDialog("Ya existe un proceso con este nombre");
+        }
+        else if(processName.trim().isEmpty()){
+            Utilities.showErrorDialog("El nombre del proceso está vacío. Ingrese algún valor");
+        }
+        else if(timeProcess.toString().equals("-1")){
+            Utilities.showErrorDialog("El tiempo del proceso está vacío. Ingrese un valor numérico entero");
+        }
+        else{
+            Process newProcess = new Process(partition, processName, timeProcess, sizeProcess, isBlock);
+            this.processManager.addToInQueue(newProcess);
+            this.viewManager.setValuesToTable(this.processManager.getListAsMatrixObject(this.processManager.getInQueue()), "Procesos Existentes");
+            this.viewManager.hideCreateAndModifyProcessDialog();
+        }
     }
 
     @Override
