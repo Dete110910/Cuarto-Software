@@ -21,7 +21,6 @@ public class Controller implements ActionListener, KeyListener {
         this.processManager = new ProcessManager();
         this.viewManager = new ViewManager(this, this);
         this.viewManager.showCreatePartitionDialog();
-
     }
 
     @Override
@@ -39,14 +38,30 @@ public class Controller implements ActionListener, KeyListener {
             case "AñadirProceso":
                 this.confirmAddProcess();
                 break;
+            case "Reportes":
+                this.changeToReportMenu();
+                break;
+            case "Atras":
+                this.changeToMenu();
+                break;
+            case "ManualUsuario":
+                this.openManual();
+                break;
+            case "Salir":
+                System.exit(0);
+                break;
         }
     }
+
 
     private void addPartition(){
         String partitionName = this.viewManager.getPartitionName();
         BigInteger partitionSize = this.viewManager.getPartitionSize();
         if(this.processManager.isAlreadyPartitionName(partitionName)){
             Utilities.showErrorDialog("Ya existe una partición con este nombre");
+        }
+        else if(partitionName.trim().equals("")){
+            Utilities.showErrorDialog("Ese nombre no está permitido para las particiones");
         }
         else if(partitionSize.equals(new BigInteger("-1"))){
             Utilities.showErrorDialog("Debe ingresar un tamaño para su partición");
@@ -58,7 +73,10 @@ public class Controller implements ActionListener, KeyListener {
     }
 
     private void cancelAddPartition(){
-        this.viewManager.hideCreatePartitionsDialog();
+        if(this.processManager.getPartitionsSize() > 0)
+            this.viewManager.hideCreatePartitionsDialog();
+        else
+            Utilities.showErrorDialog("Debe ingresar al menos una partición");
     }
 
     private void showCreateProcessDialog(){
@@ -88,6 +106,36 @@ public class Controller implements ActionListener, KeyListener {
             this.viewManager.hideCreateAndModifyProcessDialog();
         }
     }
+
+    private void changeToReportMenu(){
+        this.viewManager.changeToReportMenu();
+    }
+
+    private void changeToMenu(){
+        this.viewManager.changeToMenu();
+    }
+
+    private void openManual(){
+        try{
+            java.lang.Process p = Runtime.getRuntime().exec("rundll32 SHELL32.DLL,ShellExec_RunDLL "+"C:\\Users\\Usuario\\Desktop\\SO\\Software\\Renovar - ICETEX 2023-1.pdf");
+        } catch (Exception e){
+            System.out.println("El archivo no se puede abrir");
+        }
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     @Override
     public void keyTyped(KeyEvent e) {

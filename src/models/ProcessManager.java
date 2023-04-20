@@ -70,4 +70,8 @@ public class ProcessManager {
         this.inQueue.add(process);
     }
 
+    public int getPartitionsSize(){
+        return this.partitions.size();
+    }
+
 }

@@ -10,6 +10,7 @@ import java.math.BigInteger;
 public class ViewManager extends JFrame {
 
     private PanelMenu panelMenu;
+    private PanelMenuReport panelMenuReport;
     private PanelTable panelTable;
     private DialogCreateProcess dialogCreateProcess;
     private DialogCreatePartition dialogCreatePartition;
@@ -35,8 +36,10 @@ public class ViewManager extends JFrame {
         this.panelTable = new PanelTable();
         this.add(this.panelTable, BorderLayout.CENTER);
 
-        this.dialogCreateProcess = new DialogCreateProcess(actionListener, keyListener);
+        this.panelMenuReport = new PanelMenuReport(actionListener);
 
+
+        this.dialogCreateProcess = new DialogCreateProcess(actionListener, keyListener);
 
         this.dialogCreatePartition = new DialogCreatePartition(actionListener, keyListener);
     }
@@ -110,4 +113,17 @@ public class ViewManager extends JFrame {
         this.dialogCreateProcess.cleanAllFields();
         SwingUtilities.updateComponentTreeUI(this);
     }
+
+    public void changeToReportMenu() {
+        this.remove(this.panelMenu);
+        this.add(this.panelMenuReport, BorderLayout.WEST);
+        SwingUtilities.updateComponentTreeUI(this);
+    }
+
+    public void changeToMenu(){
+        this.remove(panelMenuReport);
+        this.add(this.panelMenu, BorderLayout.WEST);
+        SwingUtilities.updateComponentTreeUI(this);
+    }
+
 }

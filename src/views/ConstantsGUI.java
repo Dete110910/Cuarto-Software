@@ -17,7 +17,7 @@ public class ConstantsGUI {
 
 
 
-    public static String[] HEADERS = {"Nombre", "Tiempo", "Bloqueo", "Suspender", "Reanudar"};
+    public static String[] HEADERS = {"Partición", "Nombre", "Tiempo", "Tamaño", "Bloqueo"};
 
 
 }
