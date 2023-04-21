@@ -11,7 +11,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.math.BigInteger;
-import java.util.ArrayList;
 
 public class Controller implements ActionListener, KeyListener {
 
@@ -38,6 +37,9 @@ public class Controller implements ActionListener, KeyListener {
                 break;
             case "AñadirProceso":
                 this.confirmAddProcess();
+                break;
+            case "CancelarAñadirProceso":
+                this.cancelAddProcess();
                 break;
             case "Reportes":
                 this.changeToReportMenu();
@@ -82,7 +84,7 @@ public class Controller implements ActionListener, KeyListener {
         }
     }
     private void p(){
-        processManager.p();
+        //processManager.p();
     }
 
     private void cleanMainTableProcess(){
@@ -92,6 +94,7 @@ public class Controller implements ActionListener, KeyListener {
     private void addPartition(){
         String partitionName = this.viewManager.getPartitionName();
         BigInteger partitionSize = this.viewManager.getPartitionSize();
+
         if(this.processManager.isAlreadyPartitionName(partitionName)){
             Utilities.showErrorDialog("Ya existe una partición con este nombre");
         }
@@ -115,6 +118,7 @@ public class Controller implements ActionListener, KeyListener {
     }
 
     private void showCreateProcessDialog(){
+        this.viewManager.setComboPartitions(processManager.getPartitionsAsArray());
         this.viewManager.showCreateProcessDialog();
     }
 
@@ -125,8 +129,8 @@ public class Controller implements ActionListener, KeyListener {
         boolean isBlock = this.viewManager.isBlock();
         Partition partition = this.processManager.getPartitionByName(this.viewManager.getSelectedPartition());
 
-        if(this.processManager.isAlreadyName(processName)){
-            Utilities.showErrorDialog("Ya existe un proceso con este nombre");
+        if(this.processManager.isAlreadyNameInPartition(partition.getName(), processName)){
+            Utilities.showErrorDialog("Ya existe un proceso con este nombre en esta partición");
         }
         else if(processName.trim().isEmpty()){
             Utilities.showErrorDialog("El nombre del proceso está vacío. Ingrese algún valor");
@@ -140,6 +144,10 @@ public class Controller implements ActionListener, KeyListener {
             this.viewManager.setValuesToTable(this.processManager.getListAsMatrixObject(this.processManager.getInQueue()), "Procesos Existentes");
             this.viewManager.hideCreateAndModifyProcessDialog();
         }
+    }
+
+    private void cancelAddProcess(){
+        this.viewManager.hideCreateAndModifyProcessDialog();
     }
 
     private void changeToReportMenu(){

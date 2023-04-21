@@ -66,7 +66,10 @@ public class ViewManager extends JFrame {
 
     public void showCreateProcessDialog(){
         this.dialogCreateProcess.setVisible(true);
+    }
 
+    public void setComboPartitions(String[] comboPartitions){
+        this.dialogCreateProcess.setValuesCombo(comboPartitions);
     }
 
     public String getProcessName(){
