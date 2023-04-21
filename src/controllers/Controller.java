@@ -11,6 +11,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.math.BigInteger;
+import java.util.ArrayList;
 
 public class Controller implements ActionListener, KeyListener {
 
@@ -41,6 +42,9 @@ public class Controller implements ActionListener, KeyListener {
             case "Reportes":
                 this.changeToReportMenu();
                 break;
+            case "Enviar":
+                this.intiSimulation();
+                this.p();
             case "Atras":
                 this.changeToMenu();
                 break;
@@ -53,6 +57,37 @@ public class Controller implements ActionListener, KeyListener {
         }
     }
 
+ /*   private void  sendCPU(){
+        int response = Utilities.showWarningSendCPU();
+        if(response == 0){
+            processManager.sendCPU();
+            Utilities.showDoneCPUProcess();
+            this.saveReports();
+            processManager.copyToCurrentProcess();
+            processManager.cleanQueueList();
+            this.cleanMainTableProcess();
+            viewManager.showTableProcessPanel();
+
+        }
+    }*/
+    private void intiSimulation(){
+        int response = Utilities.showConfirmationWarning();
+        if(response == 0){
+            processManager.initSimulation();
+            Utilities.showDoneCPUProcess();
+            //this.saveReports();
+            processManager.cleanQueueList();
+            this.cleanMainTableProcess();
+            //this.loadReportList();
+        }
+    }
+    private void p(){
+        processManager.p();
+    }
+
+    private void cleanMainTableProcess(){
+        this.viewManager.setValuesToTable(processManager.getListAsMatrixObject(processManager.getInQueue()), "Procesos Actuales");
+    }
 
     private void addPartition(){
         String partitionName = this.viewManager.getPartitionName();

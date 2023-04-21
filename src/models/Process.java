@@ -58,4 +58,15 @@ public class Process {
     public void setPartition(Partition partition) {
         this.partition = partition;
     }
+
+    @Override
+    public String toString() {
+        return "Process{" +
+                "partition=" + partition +
+                ", name='" + name + '\'' +
+                ", time=" + time +
+                ", size=" + size +
+                ", isBlock=" + isBlock +
+                "}\n";
+    }
 }
