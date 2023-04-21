@@ -82,7 +82,7 @@ public class Controller implements ActionListener, KeyListener {
         }
     }
     private void p(){
-        processManager.printReport();
+       // processManager.printReport();
     }
 
     private void cleanMainTableProcess(){
