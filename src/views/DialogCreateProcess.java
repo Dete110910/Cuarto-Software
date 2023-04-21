@@ -192,6 +192,9 @@ public class DialogCreateProcess extends JDialog {
     public void cleanAllFields() {
         this.inputNameProcess.setText("");
         this.inputTimeProcess.setText("");
+        this.inputSizeProcess.setText("");
+        this.partitionCombo.setSelectedIndex(0);
+        this.yesBlockProcess.setSelected(true);
     }
 
     public String getSelectedElementFirstCombo(){

@@ -2,7 +2,6 @@ package models;
 
 import java.math.BigInteger;
 import java.util.ArrayList;
-import java.util.List;
 
 public class ProcessManager {
 
@@ -36,9 +35,9 @@ public class ProcessManager {
         this.partitions.add(new Partition(partitionName, partitionSize));
     }
 
-    public boolean isAlreadyName(String nameProcess) {
+    public boolean isAlreadyNameInPartition( String partitionName, String nameProcess) {
         for (Process process : inQueue) {
-            if (process.getName().equals(nameProcess))
+            if (process.getPartition().getName().equals(partitionName) && process.getName().equals(nameProcess))
                 return true;
         }
         return false;
@@ -46,6 +45,14 @@ public class ProcessManager {
 
     public ArrayList<Partition> getPartitions(){
         return this.partitions;
+    }
+
+    public String[] getPartitionsAsArray(){
+        String[] partitionsList = new String[partitions.size()];
+        for(int i = 0; i < partitionsList.length; i++){
+            partitionsList[i] = partitions.get(i).getName();
+        }
+        return partitionsList;
     }
 
     public Partition getPartitionByName(String partitionName){
@@ -56,7 +63,7 @@ public class ProcessManager {
         return null;
     }
 
-    public Object[][] getListAsMatrixObject(ArrayList<Process> list){
+    public Object[][] getProcessListAsMatrixObject(ArrayList<Process> list){
         return this.parseArrayListToMatrixObject(list);
     }
 
@@ -65,13 +72,27 @@ public class ProcessManager {
         Object[][] processList = new Object[sizeQueue][5];
 
         for(int i = 0; i < sizeQueue; i++){
-            processList[i][0] = list.get(i).getPartition();
+            processList[i][0] = list.get(i).getPartition().getName();
             processList[i][1] = list.get(i).getName();
             processList[i][2] = list.get(i).getTime();
             processList[i][3] = list.get(i).getSize();
             processList[i][4] = list.get(i).isBlock();
         }
+        return processList;
+    }
 
+    public Object[][] getPartitionsListAsMatrixObject(ArrayList<Partition> list){
+        return this.parseArrayPartitionListToMatrixObject(list);
+    }
+
+    private Object[][] parseArrayPartitionListToMatrixObject(ArrayList<Partition> list){
+        int sizeQueue = list.size();
+        Object[][] processList = new Object[sizeQueue][5];
+
+        for(int i = 0; i < sizeQueue; i++){
+            processList[i][0] = list.get(i).getName();
+            processList[i][1] = list.get(i).getSize();
+        }
         return processList;
     }
 
