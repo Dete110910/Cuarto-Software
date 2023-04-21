@@ -13,7 +13,7 @@ public class ViewManager extends JFrame {
     private PanelMenuReport panelMenuReport;
     private PanelTable panelTable;
     private DialogCreateProcess dialogCreateProcess;
-    private DialogCreatePartition dialogCreatePartition;
+    private DialogContainerCreatePartitionAndTable dialogContainerCreatePartitionAndTable;
     public ViewManager(ActionListener actionListener, KeyListener keyListener){
         this.setLayout(new BorderLayout());
         this.setTitle("Tercer Software");
@@ -38,30 +38,29 @@ public class ViewManager extends JFrame {
 
         this.panelMenuReport = new PanelMenuReport(actionListener);
 
-
         this.dialogCreateProcess = new DialogCreateProcess(actionListener, keyListener);
 
-        this.dialogCreatePartition = new DialogCreatePartition(actionListener, keyListener);
+        this.dialogContainerCreatePartitionAndTable = new DialogContainerCreatePartitionAndTable(actionListener, keyListener, panelTable);
     }
 
     public void showCreatePartitionDialog(){
-        this.dialogCreatePartition.setVisible(true);
+        this.dialogContainerCreatePartitionAndTable.setVisible(true);
     }
 
     public void hideCreatePartitionsDialog(){
-        this.dialogCreatePartition.setVisible(false);
+        this.dialogContainerCreatePartitionAndTable.setVisible(false);
     }
 
     public String getPartitionName(){
-        return this.dialogCreatePartition.getPartitionName();
+        return this.dialogContainerCreatePartitionAndTable.getPartitionName();
     }
 
     public BigInteger getPartitionSize(){
-        return this.dialogCreatePartition.getPartitionSize();
+        return this.dialogContainerCreatePartitionAndTable.getPartitionSize();
     }
 
     public void cleanFieldsPartitionDialog(){
-        this.dialogCreatePartition.cleanAllFields();
+        this.dialogContainerCreatePartitionAndTable.cleanAllFields();
     }
 
     public void showCreateProcessDialog(){
@@ -105,10 +104,13 @@ public class ViewManager extends JFrame {
             if(!queueList[i][4].equals("Sí") && !queueList[i][4].equals("No")){
                 queueList[i][4] = queueList[i][4].equals(true) ? "Sí" : "No";
             }
-
-
         }
         return queueList;
+    }
+
+    public void setValuesToPartitionsTable(Object[][] list){
+        DefaultTableModel defaultTableModel = new DefaultTableModel(list, ConstantsGUI.TABLE_HEADERS);
+        this.panelTable.setTableProcess(defaultTableModel);
     }
 
     public void hideCreateAndModifyProcessDialog(){

@@ -1,32 +1,30 @@
 package views;
 
-import jdk.jshell.execution.Util;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyListener;
 import java.math.BigInteger;
-import java.security.Key;
 
-public class DialogCreatePartition extends JDialog {
+public class PanelCreatePartition extends JPanel {
 
     private Button add, cancel;
 
     private JLabel partitionName, partitionSize;
     private JTextField inputPartitionName, inputPartitionSize;
 
-    public DialogCreatePartition(ActionListener actionListener, KeyListener keyListener){
-        this.setModal(true);
-        this.setTitle("Crear particiones");
+    public PanelCreatePartition(ActionListener actionListener, KeyListener keyListener){
+        //this.setModal(true);
+        //this.setTitle("Crear particiones");
         this.setLayout(new GridBagLayout());
         this.setFont(ConstantsGUI.MAIN_MENU);
-        this.setSize(420, 320);
-        this.setUndecorated(true);
-        this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        this.setLocationRelativeTo(null);
-        this.setResizable(false);
-        this.getContentPane().setBackground(Color.decode("#C9ADA7"));
+        this.setSize(420, 420);
+        this.setPreferredSize(new Dimension(460, 200));
+        //this.setUndecorated(true);
+        //this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        //this.setLocationRelativeTo(null);
+        //this.setResizable(false);
+        this.setBackground(Color.decode("#C9ADA7"));
         this.initComponents(actionListener, keyListener);
 
     }
@@ -66,6 +64,7 @@ public class DialogCreatePartition extends JDialog {
         this.cancel.setActionCommand("CancelarParticion");
         this.cancel.setPreferredSize(new Dimension(150, 35));
         Utilities.addComponent(this, cancel, 1, 2);
+
     }
 
     public String getPartitionName(){
