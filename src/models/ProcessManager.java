@@ -187,39 +187,6 @@ public class ProcessManager {
         this.partitions = partitions;
     }
 
-    /*   public void sendCPU() {
-        this.cleanAllLists();
-        this.initLoadToReady();
-        int i = 0;
-        if(this.readyList.size() > 0){
-            boolean canContinue = true;
-            while (canContinue) {
-                this.loadToDispatchQueue(new Process(readyList.get(i)));
-                this.loadToExecQueue(new Process(readyList.get(i)));
-
-                if(!(readyList.get(i).getTime() == 0)){
-                    if (readyList.get(i).getTime() > PROCESS_TIME && !readyList.get(i).isIsLock()) {
-                        this.loadToExpirationTimeQueue(new Process(readyList.get(i).getName(), this.consumeTimeProcess(readyList.get(i)), readyList.get(i).isIsLock()));
-                        this.loadToReadyQueue(new Process(new Process(readyList.get(i).getName(), this.consumeTimeProcess(readyList.get(i)), readyList.get(i).isIsLock())));
-                    } else if (readyList.get(i).getTime() > PROCESS_TIME && readyList.get(i).isIsLock()) {
-                        this.loadToBlockList(new Process(readyList.get(i).getName(), this.consumeTimeProcess(readyList.get(i)), readyList.get(i).isIsLock()));
-                        this.loadToWakeUpList(new Process(readyList.get(i).getName(), this.consumeTimeProcess(readyList.get(i)), readyList.get(i).isIsLock()));
-                        this.loadToReadyQueue(new Process(readyList.get(i).getName(), this.consumeTimeProcess(readyList.get(i)), readyList.get(i).isIsLock()));
-                    }else {
-                        this.loadToFinishedQueue(new Process(readyList.get(i).getName(), 0, readyList.get(i).isIsLock()));
-                    }
-                }
-                else
-                    this.loadToFinishedQueue(new Process(readyList.get(i)));
-
-                i++;
-                if((readyList.size() <= i))
-                    canContinue = false;
-
-            }
-        }
-    }*/
-
     public void initSimulation(){
         this.cleanAllLists();
         this.copyToCurrentProcess();
@@ -263,7 +230,7 @@ public class ProcessManager {
     }
 
     public void printReport(){
-        System.out.println(noExecutionList.toString());
+        System.out.println(finishedList.toString());
     }
     private void copyToCurrentProcess(){
         currentList.addAll(inQueue);
@@ -355,6 +322,8 @@ public class ProcessManager {
         readyList.add(new Process(new Partition("part2",new BigInteger("20")), "p2", new BigInteger("10"),new BigInteger("3"), true));
         readyList.add(new Process(new Partition("part3",new BigInteger("30")), "p3", new BigInteger("15"),new BigInteger("40"), false));
         readyList.add(new Process(new Partition("part1",new BigInteger("10")), "p4", new BigInteger("20"),new BigInteger("5"), true));
+        readyList.add(new Process(new Partition("part1",new BigInteger("10")), "p5", new BigInteger("20"),new BigInteger("5"), true));
+        readyList.add(new Process(new Partition("part1",new BigInteger("10")), "p6", new BigInteger("20"),new BigInteger("5"), true));
     }
     public void cleanQueueList(){
         inQueue.clear();
