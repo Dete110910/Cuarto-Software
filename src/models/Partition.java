@@ -27,4 +27,12 @@ public class Partition {
     public void setSize(BigInteger size) {
         this.size = size;
     }
+
+    @Override
+    public String toString() {
+        return "Partition{" +
+                "name='" + name + '\'' +
+                ", size=" + size +
+                '}';
+    }
 }
