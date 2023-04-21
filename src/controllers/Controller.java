@@ -88,7 +88,7 @@ public class Controller implements ActionListener, KeyListener {
     }
 
     private void cleanMainTableProcess(){
-        this.viewManager.setValuesToTable(processManager.getListAsMatrixObject(processManager.getInQueue()), "Procesos Actuales");
+        this.viewManager.setValuesToTable(processManager.getProcessListAsMatrixObject(processManager.getInQueue()), "Procesos Actuales");
     }
 
     private void addPartition(){
@@ -106,6 +106,7 @@ public class Controller implements ActionListener, KeyListener {
         }
         else {
             this.processManager.addPartition(partitionName, partitionSize);
+            this.viewManager.setValuesToPartitionsTable(processManager.getPartitionsListAsMatrixObject(processManager.getPartitions()));
             this.viewManager.cleanFieldsPartitionDialog();
         }
     }
@@ -141,7 +142,7 @@ public class Controller implements ActionListener, KeyListener {
         else{
             Process newProcess = new Process(partition, processName, timeProcess, sizeProcess, isBlock);
             this.processManager.addToInQueue(newProcess);
-            this.viewManager.setValuesToTable(this.processManager.getListAsMatrixObject(this.processManager.getInQueue()), "Procesos Existentes");
+            this.viewManager.setValuesToTable(this.processManager.getProcessListAsMatrixObject(this.processManager.getInQueue()), "Procesos Existentes");
             this.viewManager.hideCreateAndModifyProcessDialog();
         }
     }

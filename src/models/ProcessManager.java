@@ -63,7 +63,7 @@ public class ProcessManager {
         return null;
     }
 
-    public Object[][] getListAsMatrixObject(ArrayList<Process> list){
+    public Object[][] getProcessListAsMatrixObject(ArrayList<Process> list){
         return this.parseArrayListToMatrixObject(list);
     }
 
@@ -78,7 +78,21 @@ public class ProcessManager {
             processList[i][3] = list.get(i).getSize();
             processList[i][4] = list.get(i).isBlock();
         }
+        return processList;
+    }
 
+    public Object[][] getPartitionsListAsMatrixObject(ArrayList<Partition> list){
+        return this.parseArrayPartitionListToMatrixObject(list);
+    }
+
+    private Object[][] parseArrayPartitionListToMatrixObject(ArrayList<Partition> list){
+        int sizeQueue = list.size();
+        Object[][] processList = new Object[sizeQueue][5];
+
+        for(int i = 0; i < sizeQueue; i++){
+            processList[i][0] = list.get(i).getName();
+            processList[i][1] = list.get(i).getSize();
+        }
         return processList;
     }
 
