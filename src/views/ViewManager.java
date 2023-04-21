@@ -40,7 +40,7 @@ public class ViewManager extends JFrame {
 
         this.dialogCreateProcess = new DialogCreateProcess(actionListener, keyListener);
 
-        this.dialogContainerCreatePartitionAndTable = new DialogContainerCreatePartitionAndTable(actionListener, keyListener, panelTable);
+        this.dialogContainerCreatePartitionAndTable = new DialogContainerCreatePartitionAndTable(actionListener, keyListener);
     }
 
     public void showCreatePartitionDialog(){
@@ -110,7 +110,7 @@ public class ViewManager extends JFrame {
 
     public void setValuesToPartitionsTable(Object[][] list){
         DefaultTableModel defaultTableModel = new DefaultTableModel(list, ConstantsGUI.TABLE_HEADERS);
-        this.panelTable.setTableProcess(defaultTableModel);
+        this.dialogContainerCreatePartitionAndTable.setTableProcess(defaultTableModel);
     }
 
     public void hideCreateAndModifyProcessDialog(){

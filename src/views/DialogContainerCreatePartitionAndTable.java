@@ -12,7 +12,8 @@ public class DialogContainerCreatePartitionAndTable extends JDialog {
     private PanelCreatePartition panelCreatePartition;
     private PanelTable panelTable;
 
-    public DialogContainerCreatePartitionAndTable(ActionListener actionListener, KeyListener keyListener, PanelTable panelTable){
+
+    public DialogContainerCreatePartitionAndTable(ActionListener actionListener, KeyListener keyListener){
         this.setModal(true);
         this.setTitle("Crear particiones");
         this.setLayout(new BorderLayout());
@@ -23,12 +24,12 @@ public class DialogContainerCreatePartitionAndTable extends JDialog {
         this.setLocationRelativeTo(null);
         this.setResizable(false);
         this.getContentPane().setBackground(Color.decode("#C9ADA7"));
-        this.initComponents(actionListener, keyListener, panelTable);
+        this.initComponents(actionListener, keyListener);
     }
 
-    private void initComponents(ActionListener actionListener, KeyListener keyListener, PanelTable panelTable){
+    private void initComponents(ActionListener actionListener, KeyListener keyListener){
         this.panelCreatePartition = new PanelCreatePartition(actionListener, keyListener);
-        this.panelTable = panelTable;
+        this.panelTable = new PanelTable();
 
         this.add(panelCreatePartition, BorderLayout.NORTH);
         Object[][] tableModel = new Object[0][0];
@@ -38,6 +39,10 @@ public class DialogContainerCreatePartitionAndTable extends JDialog {
         this.add(panelTable,BorderLayout.CENTER);
 
 
+    }
+
+    public void setTableProcess(DefaultTableModel defaultTableModel){
+        this.panelTable.setTableProcess(defaultTableModel);
     }
 
     public String getPartitionName(){
