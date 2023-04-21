@@ -112,8 +112,11 @@ public class Controller implements ActionListener, KeyListener {
     }
 
     private void cancelAddPartition(){
-        if(this.processManager.getPartitionsSize() > 0)
+        if(this.processManager.getPartitionsSize() > 0){
             this.viewManager.hideCreatePartitionsDialog();
+            this.viewManager.setValuesToTable(this.processManager.getProcessListAsMatrixObject(this.processManager.getInQueue()), "Procesos Existentes");
+        }
+
         else
             Utilities.showErrorDialog("Debe ingresar al menos una partición");
     }
