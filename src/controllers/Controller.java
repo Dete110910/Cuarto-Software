@@ -49,7 +49,34 @@ public class Controller implements ActionListener, KeyListener {
                 break;
             case "Enviar":
                 this.intiSimulation();
-                this.p();
+                break;
+            case "Actuales":
+                this.setValuesToCurrentReport();
+                break;
+            case "Listos":
+                this.setValuesToReadyReport();
+                break;
+            case "Despachados":
+                this.setValuesToDispatchReport();
+                break;
+            case "Ejecucion":
+                this.setValuesToExecReport();
+                break;
+            case "Expirados":
+                this.setValuesToExpReport();
+                break;
+            case "Bloqueados":
+                this.setValuesToBlockReport();
+                break;
+            case "Despertar":
+                this.setValuesToWakeReport();
+                break;
+            case "Finalizados":
+                this.setValuesToFinishedReport();
+                break;
+            case "NoEjecutados":
+                this.setValuesToNoExecReport();
+                break;
             case "Atras":
                 this.changeToMenu();
                 break;
@@ -82,12 +109,10 @@ public class Controller implements ActionListener, KeyListener {
             Utilities.showDoneCPUProcess();
             //this.saveReports();
             processManager.cleanQueueList();
+            processManager.copyToCurrentProcess();
             this.cleanMainTableProcess();
-            //this.loadReportList();
+            this.loadReportList();
         }
-    }
-    private void p(){
-       // processManager.printReport();
     }
 
     private void cleanMainTableProcess(){
@@ -179,14 +204,48 @@ public class Controller implements ActionListener, KeyListener {
         }
 
     }
+    private void loadReportList(){
+        viewManager.setCurrentList(processManager.getProcessListAsMatrixObject(processManager.getCurrentList()));
+        viewManager.setInQueueList(processManager.getProcessListAsMatrixObject(processManager.getInQueue()));
+        viewManager.setReadyList(processManager.getProcessListAsMatrixObject(processManager.getReadyList()));
+        viewManager.setDispatchList(processManager.getProcessListAsMatrixObject(processManager.getDispatchList()));
+        viewManager.setExecutionList(processManager.getProcessListAsMatrixObject(processManager.getExecutionList()));
+        viewManager.setExpirationList(processManager.getProcessListAsMatrixObject(processManager.getExpirationList()));
+        viewManager.setBlockList(processManager.getProcessListAsMatrixObject(processManager.getBlockList()));
+        viewManager.setWakeList(processManager.getProcessListAsMatrixObject(processManager.getWakeUpList()));
+        viewManager.setFinishedList(processManager.getProcessListAsMatrixObject(processManager.getFinishedList()));
+        viewManager.setNoExecutionList(processManager.getProcessListAsMatrixObject(processManager.getNoExecutionList()));
+    }
+    public void setValuesToCurrentReport(){
+        this.viewManager.setValuesToCurrentReport();
+    }
 
+    public void setValuesToReadyReport(){
+        this.viewManager.setValuesToReadyReport();
+    }
+    public void setValuesToDispatchReport(){
+        this.viewManager.setValuesToDispatchReport();
+    }
 
+    public void setValuesToExecReport(){
+        this.viewManager.setValuesToExecReport();
+    }
 
-
-
-
-
-
+    public void setValuesToExpReport(){
+        this.viewManager.setValuesToExepReport();
+    }
+    public void setValuesToBlockReport(){
+        this.viewManager.setValuesToBlockReport();
+    }
+    public void setValuesToWakeReport(){
+        this.viewManager.setValuesToWakeReport();
+    }
+    public void setValuesToFinishedReport(){
+        this.viewManager.setValuesToFinishedReport();
+    }
+    public void setValuesToNoExecReport(){
+        this.viewManager.setValuesToNoExecReport();
+    }
 
 
 

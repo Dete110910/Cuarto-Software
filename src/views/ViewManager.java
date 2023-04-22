@@ -15,6 +15,9 @@ public class ViewManager extends JFrame {
     private PanelTable panelTable;
     private DialogCreateProcess dialogCreateProcess;
     private DialogContainerCreatePartitionAndTable dialogContainerCreatePartitionAndTable;
+
+    private Object[][] inQueue, currentList, readyList, dispatchList, executionList, expirationList, blockList, wakeUpList, finishedList, noExecutionList;
+
     public ViewManager(ActionListener actionListener, KeyListener keyListener){
         this.setLayout(new BorderLayout());
         this.setTitle("Tercer Software");
@@ -42,8 +45,10 @@ public class ViewManager extends JFrame {
         this.panelMenuReport = new PanelMenuReport(actionListener);
 
         this.dialogCreateProcess = new DialogCreateProcess(actionListener, keyListener);
-
         this.dialogContainerCreatePartitionAndTable = new DialogContainerCreatePartitionAndTable(actionListener, keyListener);
+
+        this.inQueue = new Object[0][0];
+        this.readyList = new Object[0][0];
     }
 
     public void showCreatePartitionDialog(){
@@ -146,4 +151,71 @@ public class ViewManager extends JFrame {
         SwingUtilities.updateComponentTreeUI(this);
     }
 
+    public void setCurrentList(Object[][] currentList) {
+        this.currentList = currentList;
+    }
+    public void setInQueueList(Object[][] inQueue) {
+        this.inQueue = inQueue;
+    }
+
+    public void setReadyList(Object[][] readyList) {
+        this.readyList = readyList;
+    }
+    public void setDispatchList(Object[][] dispatchList) {
+        this.dispatchList = dispatchList;
+    }
+    public void setExecutionList(Object[][] executionList) {
+        this.executionList = executionList;
+    }
+    public void setExpirationList(Object[][] expirationList) {
+        this.expirationList = expirationList;
+    }
+    public void setBlockList(Object[][] blockList) {
+        this.blockList = blockList;
+    }
+
+    public void setWakeList(Object[][] wakeUpList) {
+        this.wakeUpList = wakeUpList;
+    }
+    public void setFinishedList(Object[][] finishedList) {
+        this.finishedList = finishedList;
+    }
+    public void setNoExecutionList(Object[][] noExecutionList) {
+        this.noExecutionList = noExecutionList;
+    }
+
+    public void setValuesToCurrentProcess(){
+        this.setValuesToTable(this.inQueue, "Procesos Existentes");
+    }
+
+      public void setValuesToCurrentReport(){
+        this.setValuesToTable(this.currentList, "Procesos Actuales");
+    }
+
+    public void setValuesToReadyReport(){
+        this.setValuesToTable(this.readyList, "Procesos Listos");
+    }
+    public void setValuesToDispatchReport(){
+        this.setValuesToTable(this.dispatchList, "Procesos Despachados");
+    }
+
+    public void setValuesToExecReport(){
+        this.setValuesToTable(this.executionList, "Procesos en Ejecución");
+    }
+
+    public void setValuesToExepReport(){
+        this.setValuesToTable(this.expirationList, "Procesos Expirados");
+    }
+    public void setValuesToBlockReport(){
+        this.setValuesToTable(this.blockList, "Procesos Bloqueados");
+    }
+    public void setValuesToWakeReport(){
+        this.setValuesToTable(this.wakeUpList, "Procesos Despiertos");
+    }
+    public void setValuesToFinishedReport(){
+        this.setValuesToTable(this.finishedList, "Procesos Finalizados");
+    }
+    public void setValuesToNoExecReport(){
+        this.setValuesToTable(this.noExecutionList, "Procesos No Ejecutados");
+    }
 }

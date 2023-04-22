@@ -66,6 +66,11 @@ public class PanelMenuReport extends JPanel {
         finishedReport.setActionCommand("Finalizados");
         Utilities.addComponent(this, this.finishedReport, 0, 9);
 
+        finishedReport = new Button("No Ejecutados");
+        finishedReport.addActionListener(listener);
+        finishedReport.setActionCommand("NoEjecutados");
+        Utilities.addComponent(this, this.finishedReport, 0, 10);
+
         back = new Button("Atrás");
         back.addActionListener(listener);
         back.setActionCommand("Atras");
