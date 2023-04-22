@@ -13,9 +13,9 @@ public class PanelMenuReport extends JPanel {
     public PanelMenuReport(ActionListener listener){
         this.setLayout(new GridBagLayout());
         this.setBackground(Color.decode("#4a4e69"));
-        this.setPreferredSize(new Dimension(380,80));
-        this.setMaximumSize(new Dimension(380,80));
-        this.setMinimumSize(new Dimension(380,80));
+        this.setPreferredSize(new Dimension(350,80));
+        this.setMaximumSize(new Dimension(350,80));
+        this.setMinimumSize(new Dimension(350,80));
         this.initComponents(listener);
         this.setVisible(true);
     }
