@@ -91,26 +91,11 @@ public class Controller implements ActionListener, KeyListener {
                 break;
         }
     }
-
- /*   private void  sendCPU(){
-        int response = Utilities.showWarningSendCPU();
-        if(response == 0){
-            processManager.sendCPU();
-            Utilities.showDoneCPUProcess();
-            this.saveReports();
-            processManager.copyToCurrentProcess();
-            processManager.cleanQueueList();
-            this.cleanMainTableProcess();
-            viewManager.showTableProcessPanel();
-
-        }
-    }*/
     private void intiSimulation(){
         int response = Utilities.showConfirmationWarning();
         if(response == 0){
             processManager.initSimulation();
             Utilities.showDoneCPUProcess();
-            //this.saveReports();
             processManager.cleanQueueList();
             processManager.copyToCurrentProcess();
             this.cleanMainTableProcess();
