@@ -16,6 +16,8 @@ public class ViewManager extends JFrame {
     private DialogCreateProcess dialogCreateProcess;
     private DialogContainerCreatePartitionAndTable dialogContainerCreatePartitionAndTable;
 
+    private boolean isPartitionsMenuActive = false;
+
     private Object[][] inQueue, currentList, readyList, dispatchList, executionList, expirationList, blockList, wakeUpList, finishedList, noExecutionList;
 
     public ViewManager(ActionListener actionListener, KeyListener keyListener){
@@ -54,6 +56,13 @@ public class ViewManager extends JFrame {
     public void showCreatePartitionDialog(){
         this.dialogContainerCreatePartitionAndTable.setVisible(true);
     }
+
+    public void showCreatePartitionDialogWithoutTable(){
+        this.dialogContainerCreatePartitionAndTable.removeTable();
+        this.dialogContainerCreatePartitionAndTable.reorderDialog();
+        this.dialogContainerCreatePartitionAndTable.setVisible(true);
+    }
+
 
     public void hideCreatePartitionsDialog(){
         this.dialogContainerCreatePartitionAndTable.setVisible(false);
@@ -150,6 +159,16 @@ public class ViewManager extends JFrame {
         this.add(this.panelMenu, BorderLayout.WEST);
         SwingUtilities.updateComponentTreeUI(this);
     }
+
+    public void setPartitionsMenuActive(boolean isActive){
+        this.isPartitionsMenuActive = isActive;
+    }
+
+    public boolean getIsPartitionsMenuActive(){
+        return this.isPartitionsMenuActive;
+    }
+
+
 
     public void setCurrentList(Object[][] currentList) {
         this.currentList = currentList;

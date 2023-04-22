@@ -58,4 +58,17 @@ public class DialogContainerCreatePartitionAndTable extends JDialog {
         this.panelCreatePartition.cleanAllFields();
     }
 
+    public void removeTable(){
+        this.remove(panelTable);
+    }
+
+    public void reorderDialog(){
+        this.setSize(420, 320);
+        this.setPreferredSize(new Dimension(420, 320));
+        this.remove(this.panelCreatePartition);
+        this.add(this.panelCreatePartition, BorderLayout.CENTER);
+        SwingUtilities.updateComponentTreeUI(this);
+
+    }
+
 }
