@@ -188,7 +188,6 @@ public class ProcessManager {
     }
 
     public void initSimulation(){
-       //this.cleanAllLists();
         this.copyToCurrentProcess();
         this.initLoadToReady();
         this.initPartitions();
@@ -196,32 +195,32 @@ public class ProcessManager {
             for (int i = 0; i < readyList.size(); i++) {
                 if (readyList.get(i).getPartition().getName().equals(partitions.get(j).getName())) {
                     if ((readyList.get(i).getSize().compareTo(partitions.get(j).getSize()) == -1) || (readyList.get(i).getSize().compareTo(partitions.get(j).getSize()) == 0)) {
-                            this.loadToDispatchQueue(new Process(readyList.get(i).getPartition(), readyList.get(i).getName(), readyList.get(i).getTime(), readyList.get(i).getSize(), readyList.get(i).isBlock()));
-                            if (readyList.get(i).getTime().compareTo(BigInteger.valueOf(PROCESS_TIME)) == 1 || readyList.get(i).getTime().compareTo(BigInteger.valueOf(PROCESS_TIME)) == 0) {
-                                this.loadToExecQueue(new Process(readyList.get(i).getPartition(), readyList.get(i).getName(), this.consumeTimeProcess(readyList.get(i)), readyList.get(i).getSize(), readyList.get(i).isBlock()));
-                            } else {
-                                this.loadToExecQueue(new Process(readyList.get(i).getPartition(), readyList.get(i).getName(), readyList.get(i).getTime(), readyList.get(i).getSize(), readyList.get(i).isBlock()));
-                            }
-                            if (!(readyList.get(i).getTime().compareTo(BigInteger.valueOf(0)) == 0)) {
-                                if (readyList.get(i).getTime().compareTo(BigInteger.valueOf(PROCESS_TIME)) == 1 && readyList.get(i).isBlock()) {
-                                    this.loadToBlockQueue(new Process(readyList.get(i).getPartition(), readyList.get(i).getName(), this.consumeTimeProcess(readyList.get(i)), readyList.get(i).getSize(), readyList.get(i).isBlock()));
-                                    this.loadToWakeUpQueue(new Process(readyList.get(i).getPartition(), readyList.get(i).getName(), this.consumeTimeProcess(readyList.get(i)), readyList.get(i).getSize(), readyList.get(i).isBlock()));
-                                    this.loadToReadyQueue(new Process(readyList.get(i).getPartition(), readyList.get(i).getName(), this.consumeTimeProcess(readyList.get(i)), readyList.get(i).getSize(), readyList.get(i).isBlock()));
-                                } else if (readyList.get(i).getTime().compareTo(BigInteger.valueOf(PROCESS_TIME)) == 1 && !readyList.get(i).isBlock()) {
-                                    this.loadToExpirationQueue(new Process(readyList.get(i).getPartition(), readyList.get(i).getName(), this.consumeTimeProcess(readyList.get(i)), readyList.get(i).getSize(), readyList.get(i).isBlock()));
-                                    this.loadToReadyQueue(new Process(readyList.get(i).getPartition(), readyList.get(i).getName(), this.consumeTimeProcess(readyList.get(i)), readyList.get(i).getSize(), readyList.get(i).isBlock()));
-                                } else {
-                                    this.loadToFinishedQueue(new Process(readyList.get(i).getPartition(), readyList.get(i).getName(), BigInteger.valueOf(0), readyList.get(i).getSize(), readyList.get(i).isBlock()));
-                                }
-
+                        this.loadToDispatchQueue(new Process(readyList.get(i).getPartition(), readyList.get(i).getName(), readyList.get(i).getTime(), readyList.get(i).getSize(), readyList.get(i).isBlock()));
+                        if (readyList.get(i).getTime().compareTo(BigInteger.valueOf(PROCESS_TIME)) == 1 || readyList.get(i).getTime().compareTo(BigInteger.valueOf(PROCESS_TIME)) == 0) {
+                            this.loadToExecQueue(new Process(readyList.get(i).getPartition(), readyList.get(i).getName(), this.consumeTimeProcess(readyList.get(i)), readyList.get(i).getSize(), readyList.get(i).isBlock()));
+                        } else {
+                            this.loadToExecQueue(new Process(readyList.get(i).getPartition(), readyList.get(i).getName(), readyList.get(i).getTime(), readyList.get(i).getSize(), readyList.get(i).isBlock()));
+                        }
+                        if (!(readyList.get(i).getTime().compareTo(BigInteger.valueOf(0)) == 0)) {
+                            if (readyList.get(i).getTime().compareTo(BigInteger.valueOf(PROCESS_TIME)) == 1 && readyList.get(i).isBlock()) {
+                                this.loadToBlockQueue(new Process(readyList.get(i).getPartition(), readyList.get(i).getName(), this.consumeTimeProcess(readyList.get(i)), readyList.get(i).getSize(), readyList.get(i).isBlock()));
+                                this.loadToWakeUpQueue(new Process(readyList.get(i).getPartition(), readyList.get(i).getName(), this.consumeTimeProcess(readyList.get(i)), readyList.get(i).getSize(), readyList.get(i).isBlock()));
+                                this.loadToReadyQueue(new Process(readyList.get(i).getPartition(), readyList.get(i).getName(), this.consumeTimeProcess(readyList.get(i)), readyList.get(i).getSize(), readyList.get(i).isBlock()));
+                            } else if (readyList.get(i).getTime().compareTo(BigInteger.valueOf(PROCESS_TIME)) == 1 && !readyList.get(i).isBlock()) {
+                                this.loadToExpirationQueue(new Process(readyList.get(i).getPartition(), readyList.get(i).getName(), this.consumeTimeProcess(readyList.get(i)), readyList.get(i).getSize(), readyList.get(i).isBlock()));
+                                this.loadToReadyQueue(new Process(readyList.get(i).getPartition(), readyList.get(i).getName(), this.consumeTimeProcess(readyList.get(i)), readyList.get(i).getSize(), readyList.get(i).isBlock()));
                             } else {
                                 this.loadToFinishedQueue(new Process(readyList.get(i).getPartition(), readyList.get(i).getName(), BigInteger.valueOf(0), readyList.get(i).getSize(), readyList.get(i).isBlock()));
                             }
+
                         } else {
-                            this.loadToNoExecQueue(new Process(readyList.get(i).getPartition(), readyList.get(i).getName(), readyList.get(i).getTime(), readyList.get(i).getSize(), readyList.get(i).isBlock()));
+                            this.loadToFinishedQueue(new Process(readyList.get(i).getPartition(), readyList.get(i).getName(), BigInteger.valueOf(0), readyList.get(i).getSize(), readyList.get(i).isBlock()));
                         }
+                    } else {
+                        this.loadToNoExecQueue(new Process(readyList.get(i).getPartition(), readyList.get(i).getName(), readyList.get(i).getTime(), readyList.get(i).getSize(), readyList.get(i).isBlock()));
                     }
                 }
+            }
         }
     }
     private BigInteger consumeTimeProcess(Process process) {
@@ -262,7 +261,7 @@ public class ProcessManager {
         this.noExecutionList.add(process);
     }
 
-    private void cleanAllLists(){
+    public void cleanAllLists(){
         this.currentList.clear();
         this.inQueue.clear();
         this.readyList.clear();
