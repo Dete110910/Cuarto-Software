@@ -19,7 +19,7 @@ public class ConstantsGUI {
 
     public static String[] HEADERS = {"Partición", "Nombre", "Tiempo", "Tamaño", "Bloqueo"};
 
-    public static String[] TABLE_HEADERS = {"Nombre", "Tamaño"};
+    public static String[] PARTITIONS_TABLE_HEADERS = {"Nombre", "Tamaño"};
 
 
 }

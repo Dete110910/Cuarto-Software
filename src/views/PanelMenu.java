@@ -43,7 +43,7 @@ public class PanelMenu extends JPanel {
         this.partitions = new Button("Particiones");
         this.partitions.addActionListener(actionListener);
         this.partitions.setActionCommand("MenuParticioens");
-        Utilities.addComponent(this, this.partitions, 0, 4);
+        Utilities.addComponent(this, this.partitions, 0, 5);
 
         this.reports = new Button("Reportes");
         this.reports.addActionListener(actionListener);

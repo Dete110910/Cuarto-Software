@@ -36,6 +36,7 @@ public class DialogContainerCreatePartitionAndTable extends JDialog {
         String [] headers = {"Nombre", "Tamaño"};
         this.panelTable.changeTitle("Particiones");
         this.panelTable.setTableProcess(new DefaultTableModel(tableModel, headers));
+        this.panelTable.setEnableTable(false);
         this.add(panelTable,BorderLayout.CENTER);
 
 
