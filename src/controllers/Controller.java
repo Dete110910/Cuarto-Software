@@ -41,6 +41,9 @@ public class Controller implements ActionListener, KeyListener {
             case "CancelarAñadirProceso":
                 this.cancelAddProcess();
                 break;
+            case "MenuParticioens":
+                this.changeToPartitionsMenu();
+                break;
             case "Reportes":
                 this.changeToReportMenu();
                 break;
@@ -152,6 +155,10 @@ public class Controller implements ActionListener, KeyListener {
 
     private void cancelAddProcess(){
         this.viewManager.hideCreateAndModifyProcessDialog();
+    }
+
+    private void changeToPartitionsMenu(){
+
     }
 
     private void changeToReportMenu(){

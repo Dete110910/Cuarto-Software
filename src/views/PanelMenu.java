@@ -7,7 +7,7 @@ import java.awt.event.ActionListener;
 public class PanelMenu extends JPanel {
 
     private JLabel titleMenu;
-    private Button addProcess, modifyProcess, deleteProcess, reports, sendProcess, viewManual, exit;
+    private Button addProcess, modifyProcess, deleteProcess, partitions, reports, sendProcess, viewManual, exit;
 
     public PanelMenu(ActionListener actionListener){
         this.setLayout(new GridBagLayout());
@@ -40,25 +40,30 @@ public class PanelMenu extends JPanel {
         this.deleteProcess.setActionCommand("EliminarProceso");
         Utilities.addComponent(this, this.deleteProcess, 0, 4);
 
+        this.partitions = new Button("Particiones");
+        this.partitions.addActionListener(actionListener);
+        this.partitions.setActionCommand("MenuParticioens");
+        Utilities.addComponent(this, this.partitions, 0, 4);
+
         this.reports = new Button("Reportes");
         this.reports.addActionListener(actionListener);
         this.reports.setActionCommand("Reportes");
-        Utilities.addComponent(this, this.reports, 0, 5);
+        Utilities.addComponent(this, this.reports, 0, 6);
 
         this.sendProcess = new Button("Iniciar Simulación");
         this.sendProcess.addActionListener(actionListener);
         this.sendProcess.setActionCommand("Enviar");
-        Utilities.addComponent(this, this.sendProcess, 0, 6);
+        Utilities.addComponent(this, this.sendProcess, 0, 7);
 
         this.viewManual = new Button("Manual de usuario");
         this.viewManual.addActionListener(actionListener);
         this.viewManual.setActionCommand("ManualUsuario");
-        Utilities.addComponent(this, this.viewManual, 0, 7);
+        Utilities.addComponent(this, this.viewManual, 0, 8);
 
         this.exit = new Button("Salir");
         this.exit.addActionListener(actionListener);
         this.exit.setActionCommand("Salir");
-        Utilities.addComponent(this, exit, 0, 8);
+        Utilities.addComponent(this, exit, 0, 9);
     }
 
 
