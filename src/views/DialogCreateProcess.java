@@ -126,7 +126,7 @@ public class DialogCreateProcess extends JDialog {
     }
 
 
-    public void setNameProcess(String nameProcess) {
+    public void setProcessName(String nameProcess) {
         this.inputNameProcess.setText(nameProcess);
     }
 
@@ -150,6 +150,9 @@ public class DialogCreateProcess extends JDialog {
         return timeProcess;
     }
 
+    public void setProcessSize(BigInteger processSize){
+        this.inputSizeProcess.setText(processSize.toString());
+    }
     public BigInteger getProcessSize(){
         BigInteger sizeProcess = new BigInteger("-1");
         try {
@@ -180,7 +183,7 @@ public class DialogCreateProcess extends JDialog {
 
     public void changeButtonToModify() {
         this.create.setText("Modificar");
-        this.create.setActionCommand("ConfirmarModificacion");
+        this.create.setActionCommand("ConfirmarModificacionProceso");
     }
 
     public void changeButtonToCreate() {

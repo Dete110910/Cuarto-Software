@@ -307,4 +307,12 @@ public class ProcessManager {
     public void deletePartition(int indexDataInTable) {
         this.partitions.remove(indexDataInTable);
     }
+
+    public Process getProcessInQueue(int indexDataInTable) {
+        return this.inQueue.get(indexDataInTable);
+    }
+
+    public void updateProcessInQueue(Process newProcess, int indexDataInTable) {
+        this.inQueue.set(indexDataInTable, newProcess);
+    }
 }

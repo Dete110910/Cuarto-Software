@@ -81,6 +81,7 @@ public class ViewManager extends JFrame {
     }
 
     public void showCreateProcessDialog(){
+        this.dialogCreateProcess.changeButtonToCreate();
         this.dialogCreateProcess.setVisible(true);
     }
 
@@ -169,6 +170,28 @@ public class ViewManager extends JFrame {
 
     public int getIndexDataInTable(){
         return this.panelTable.getIndexDataProcess();
+    }
+
+    public void setProcessName(String processName){
+        this.dialogCreateProcess.setProcessName(processName);
+    }
+
+    public void setProcessTime(BigInteger processTime){
+        this.dialogCreateProcess.setTimeProcess(processTime);
+    }
+
+    public void setIsBlock(boolean isBlock){
+        this.dialogCreateProcess.setIsBlock(isBlock);
+    }
+
+    public void showModifyProcessDialog(){
+        this.dialogCreateProcess.changeButtonToModify();
+        this.dialogCreateProcess.setVisible(true);
+        SwingUtilities.updateComponentTreeUI(this);
+    }
+
+    public void setProcessSize(BigInteger processSize){
+        this.dialogCreateProcess.setProcessSize(processSize);
     }
 
 
