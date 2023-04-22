@@ -95,4 +95,15 @@ public class PanelCreatePartition extends JPanel {
     }
 
 
+    public void setPartitionName(String name) {
+        this.inputPartitionName.setText(name);
+    }
+    public void setPartitionSize(String size) {
+        this.inputPartitionSize.setText(size);
+    }
+
+    public void changeButtonToModify() {
+        this.add.setText("Modificar");
+        this.add.setActionCommand("ConfirmarModificacionParticion");
+    }
 }

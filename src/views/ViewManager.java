@@ -81,6 +81,7 @@ public class ViewManager extends JFrame {
     }
 
     public void showCreateProcessDialog(){
+        this.dialogCreateProcess.changeButtonToCreate();
         this.dialogCreateProcess.setVisible(true);
     }
 
@@ -99,7 +100,6 @@ public class ViewManager extends JFrame {
     public BigInteger getProcessSize(){
         return this.dialogCreateProcess.getProcessSize();
     }
-
     public boolean isBlock(){
         return this.dialogCreateProcess.getIsBlock();
     }
@@ -168,6 +168,47 @@ public class ViewManager extends JFrame {
         return this.isPartitionsMenuActive;
     }
 
+    public int getIndexDataInTable(){
+        return this.panelTable.getIndexDataProcess();
+    }
+
+    public void setProcessName(String processName){
+        this.dialogCreateProcess.setProcessName(processName);
+    }
+
+    public void setProcessTime(BigInteger processTime){
+        this.dialogCreateProcess.setTimeProcess(processTime);
+    }
+
+    public void setIsBlock(boolean isBlock){
+        this.dialogCreateProcess.setIsBlock(isBlock);
+    }
+
+    public void showModifyProcessDialog(){
+        this.dialogCreateProcess.changeButtonToModify();
+        this.dialogCreateProcess.setVisible(true);
+        SwingUtilities.updateComponentTreeUI(this);
+    }
+
+    public void setProcessSize(BigInteger processSize){
+        this.dialogCreateProcess.setProcessSize(processSize);
+    }
+
+
+    public void setPartitionName(String name) {
+        this.dialogContainerCreatePartitionAndTable.setPartitionName(name);
+    }
+
+    public void setPartitionSize(String size) {
+        this.dialogContainerCreatePartitionAndTable.setPartitionSize(size);
+    }
+
+    public void showModifyPartitionDialog(){
+        this.dialogContainerCreatePartitionAndTable.changeButtonToModify();
+        this.showCreatePartitionDialogWithoutTable();
+        SwingUtilities.updateComponentTreeUI(this);
+    }
+
 
 
     public void setCurrentList(Object[][] currentList) {
@@ -204,7 +245,7 @@ public class ViewManager extends JFrame {
     }
 
     public void setValuesToCurrentProcess(){
-        this.setValuesToTable(this.inQueue, "Procesos Existentes");
+        this.setValuesToTable(this.currentList, "Procesos Actuales");
     }
 
       public void setValuesToCurrentReport(){
@@ -237,4 +278,5 @@ public class ViewManager extends JFrame {
     public void setValuesToNoExecReport(){
         this.setValuesToTable(this.noExecutionList, "Procesos No Ejecutados");
     }
+
 }

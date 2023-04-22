@@ -283,4 +283,37 @@ public class ProcessManager {
     public void cleanQueueList(){
         inQueue.clear();
     }
+
+    public Partition getPartitionByIndex(int indexDataInTable) {
+        return this.partitions.get(indexDataInTable);
+    }
+
+    public void updatePartitions(Partition newPartition, int indexDataInTable) {
+        this.partitions.set(indexDataInTable, newPartition);
+    }
+
+    public boolean isPartitionUsed(String partitionName){
+        for(Process process : inQueue){
+            if(process.getPartition().getName().equals(partitionName)){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void deletePartition(int indexDataInTable) {
+        this.partitions.remove(indexDataInTable);
+    }
+
+    public Process getProcessInQueue(int indexDataInTable) {
+        return this.inQueue.get(indexDataInTable);
+    }
+
+    public void updateProcessInQueue(Process newProcess, int indexDataInTable) {
+        this.inQueue.set(indexDataInTable, newProcess);
+    }
+
+    public void deleteProcessInQueue(int indexDataInTable) {
+        this.inQueue.remove(indexDataInTable);
+    }
 }
