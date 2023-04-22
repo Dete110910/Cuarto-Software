@@ -99,7 +99,6 @@ public class ViewManager extends JFrame {
     public BigInteger getProcessSize(){
         return this.dialogCreateProcess.getProcessSize();
     }
-
     public boolean isBlock(){
         return this.dialogCreateProcess.getIsBlock();
     }
@@ -166,6 +165,25 @@ public class ViewManager extends JFrame {
 
     public boolean getIsPartitionsMenuActive(){
         return this.isPartitionsMenuActive;
+    }
+
+    public int getIndexDataInTable(){
+        return this.panelTable.getIndexDataProcess();
+    }
+
+
+    public void setPartitionName(String name) {
+        this.dialogContainerCreatePartitionAndTable.setPartitionName(name);
+    }
+
+    public void setPartitionSize(String size) {
+        this.dialogContainerCreatePartitionAndTable.setPartitionSize(size);
+    }
+
+    public void showModifyPartitionDialog(){
+        this.dialogContainerCreatePartitionAndTable.changeButtonToModify();
+        this.showCreatePartitionDialogWithoutTable();
+        SwingUtilities.updateComponentTreeUI(this);
     }
 
 
@@ -237,4 +255,5 @@ public class ViewManager extends JFrame {
     public void setValuesToNoExecReport(){
         this.setValuesToTable(this.noExecutionList, "Procesos No Ejecutados");
     }
+
 }

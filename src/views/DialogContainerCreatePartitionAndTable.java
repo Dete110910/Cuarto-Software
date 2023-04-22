@@ -71,4 +71,14 @@ public class DialogContainerCreatePartitionAndTable extends JDialog {
 
     }
 
+    public void setPartitionName(String name){
+        this.panelCreatePartition.setPartitionName(name);
+    }
+    public void setPartitionSize(String size){
+        this.panelCreatePartition.setPartitionSize(size);
+    }
+
+    public void changeButtonToModify() {
+        this.panelCreatePartition.changeButtonToModify();
+    }
 }
