@@ -53,6 +53,9 @@ public class Controller implements ActionListener, KeyListener {
             case "ConfirmarModificacionParticion":
                 this.confirmModifyPartition();
                 break;
+            case "EliminarParticion":
+                this.deletePartition();
+                break;
             case "Reportes":
                 this.changeToReportMenu();
                 break;
@@ -223,6 +226,23 @@ public class Controller implements ActionListener, KeyListener {
             this.processManager.updatePartitions(newPartition, this.viewManager.getIndexDataInTable());
             this.viewManager.hideCreatePartitionsDialog();
             this.viewManager.setValuesToPartitionsTableInCrud(this.processManager.getPartitionsListAsMatrixObject(this.processManager.getPartitions()));
+        }
+    }
+
+    private void deletePartition(){
+        if(this.viewManager.getIndexDataInTable() == -1){
+            Utilities.showErrorDialog("Debe seleccionar una partición");
+        }
+        else if(this.processManager.isPartitionUsed(this.processManager.getPartitionByIndex(this.viewManager.getIndexDataInTable()).getName())){
+            Utilities.showErrorDialog("Esta partición está siendo utilizada por un proceso y no se puede eliminar.");
+        }
+        else {
+            int confirmation = Utilities.showConfirmationWarning();
+            if(confirmation == 0){
+                this.processManager.deletePartition(this.viewManager.getIndexDataInTable());
+                this.viewManager.setValuesToPartitionsTableInCrud(this.processManager.getPartitionsListAsMatrixObject(this.processManager.getPartitions()));
+            }
+
         }
     }
 

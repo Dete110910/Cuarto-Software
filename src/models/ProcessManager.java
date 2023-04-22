@@ -303,4 +303,8 @@ public class ProcessManager {
         }
         return false;
     }
+
+    public void deletePartition(int indexDataInTable) {
+        this.partitions.remove(indexDataInTable);
+    }
 }
