@@ -153,8 +153,7 @@ public class DialogCreateProcess extends JDialog {
     public BigInteger getProcessSize(){
         BigInteger sizeProcess = new BigInteger("-1");
         try {
-            System.out.println(inputTimeProcess.getText());
-            sizeProcess = new BigInteger(this.inputTimeProcess.getText());
+            sizeProcess = new BigInteger(this.inputSizeProcess.getText());
         } catch (NumberFormatException numberFormatException) {
             System.out.println("Número inválido");
 
