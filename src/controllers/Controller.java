@@ -191,6 +191,7 @@ public class Controller implements ActionListener, KeyListener {
     }
 
     private void changeToMenu(){
+        processManager.cleanAllLists();
         this.viewManager.setPartitionsMenuActive(false);
         this.viewManager.setValuesToTable(this.processManager.getProcessListAsMatrixObject(this.processManager.getInQueue()), "Procesos Existentes");
         this.viewManager.changeToMainMenu();
