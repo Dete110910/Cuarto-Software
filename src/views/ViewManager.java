@@ -245,7 +245,7 @@ public class ViewManager extends JFrame {
     }
 
     public void setValuesToCurrentProcess(){
-        this.setValuesToTable(this.inQueue, "Procesos Existentes");
+        this.setValuesToTable(this.currentList, "Procesos Actuales");
     }
 
       public void setValuesToCurrentReport(){
