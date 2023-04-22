@@ -266,13 +266,10 @@ public class ProcessManager {
         this.inQueue.clear();
         this.readyList.clear();
         this.dispatchList.clear();
-        this.readyList.clear();
         this.executionList.clear();
-        this.readyList.clear();
         this.expirationList.clear();
         this.blockList.clear();
         this.wakeUpList.clear();
-        this.blockList.clear();
         this.finishedList.clear();
         this.noExecutionList.clear();
     }
