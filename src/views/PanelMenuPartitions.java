@@ -20,24 +20,24 @@ public class PanelMenuPartitions extends JPanel {
     }
 
     private void initComponents(ActionListener actionListener) {
-        this.titleMenu = new JLabel("Procesos");
+        this.titleMenu = new JLabel("Particiones");
         this.titleMenu.setForeground(Color.WHITE);
         this.titleMenu.setFont(ConstantsGUI.FONT_MENU_TITLE);
         Utilities.addComponent(this, titleMenu, 0, 0);
 
         this.addProcess = new Button("Crear");
         this.addProcess.addActionListener(actionListener);
-        this.addProcess.setActionCommand("CrearProceso");
+        this.addProcess.setActionCommand("CrearParticion");
         Utilities.addComponent(this, this.addProcess, 0, 1);
 
         this.modifyProcess = new Button("Modificar");
         this.modifyProcess.addActionListener(actionListener);
-        this.modifyProcess.setActionCommand("ModificarProceso");
+        this.modifyProcess.setActionCommand("ModificarParticion");
         Utilities.addComponent(this, this.modifyProcess, 0, 2);
 
         this.deleteProcess = new Button("Eliminar");
         this.deleteProcess.addActionListener(actionListener);
-        this.deleteProcess.setActionCommand("EliminarProceso");
+        this.deleteProcess.setActionCommand("EliminarParticion");
         Utilities.addComponent(this, this.deleteProcess, 0, 3);
 
         this.back = new Button("Atrás");
