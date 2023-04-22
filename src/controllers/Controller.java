@@ -47,6 +47,9 @@ public class Controller implements ActionListener, KeyListener {
             case "ConfirmarModificacionProceso":
                 this.confirmModifyProcess();
                 break;
+            case "EliminarProceso":
+                this.deleteProcess();
+                break;
             case "MenuParticiones":
                 this.changeToPartitionsMenu();
                 break;
@@ -107,19 +110,24 @@ public class Controller implements ActionListener, KeyListener {
         }
     }
     private void intiSimulation(){
-        int response = Utilities.showConfirmationWarning();
-        if(response == 0){
-            processManager.initSimulation();
-            Utilities.showDoneCPUProcess();
-            processManager.cleanQueueList();
-            processManager.copyToCurrentProcess();
-            this.cleanMainTableProcess();
-            this.loadReportList();
+        if(this.processManager.getInQueue().size() == 0){
+            Utilities.showErrorDialog("Debe ingresar al menos un proceso para iniciar la simulación");
+        }
+        else {
+            int response = Utilities.showConfirmationWarning();
+            if(response == 0){
+                processManager.initSimulation();
+                Utilities.showDoneCPUProcess();
+                processManager.cleanQueueList();
+                processManager.copyToCurrentProcess();
+                this.cleanMainTableProcess();
+                this.loadReportList();
+            }
         }
     }
 
     private void cleanMainTableProcess(){
-        this.viewManager.setValuesToTable(processManager.getProcessListAsMatrixObject(processManager.getInQueue()), "Procesos Actuales");
+        this.viewManager.setValuesToTable(processManager.getProcessListAsMatrixObject(processManager.getInQueue()), "Procesos Existentes");
     }
 
     private void addPartition(){
@@ -160,8 +168,13 @@ public class Controller implements ActionListener, KeyListener {
     }
 
     private void showCreateProcessDialog(){
-        this.viewManager.setComboPartitions(processManager.getPartitionsAsArray());
-        this.viewManager.showCreateProcessDialog();
+        if(this.processManager.getPartitions().size() == 0){
+         Utilities.showErrorDialog("Debe tener al menos una partición para poder crear procesos");
+        }
+        else {
+            this.viewManager.setComboPartitions(processManager.getPartitionsAsArray());
+            this.viewManager.showCreateProcessDialog();
+        }
     }
 
     private void confirmAddProcess(){
@@ -179,6 +192,9 @@ public class Controller implements ActionListener, KeyListener {
         }
         else if(timeProcess.toString().equals("-1")){
             Utilities.showErrorDialog("El tiempo del proceso está vacío. Ingrese un valor numérico entero");
+        }
+        else if(sizeProcess.toString().equals("-1")){
+            Utilities.showErrorDialog("El tamaño del proceso está vacío. Ingrese un valor numérico entero");
         }
         else{
             Process newProcess = new Process(partition, processName, timeProcess, sizeProcess, isBlock);
@@ -233,8 +249,23 @@ public class Controller implements ActionListener, KeyListener {
             this.viewManager.hideCreateAndModifyProcessDialog();
             this.viewManager.setValuesToTable(this.processManager.getProcessListAsMatrixObject(this.processManager.getInQueue()), "Procesos Existentes");
         }
+    }
+
+    private void deleteProcess(){
+        if(this.viewManager.getIndexDataInTable() == -1){
+            Utilities.showErrorDialog("Debe seleccionar un proceso");
+        }
+        else {
+            int confirmation = Utilities.showConfirmationWarning();
+                if(confirmation == 0){
+                    this.processManager.deleteProcessInQueue(this.viewManager.getIndexDataInTable());
+                    this.viewManager.setValuesToTable(this.processManager.getProcessListAsMatrixObject(this.processManager.getInQueue()), "Procesos Existentes");
+                }
+
+            }
 
     }
+
 
     private void changeToPartitionsMenu(){
         this.viewManager.setPartitionsMenuActive(true);
@@ -298,6 +329,7 @@ public class Controller implements ActionListener, KeyListener {
 
     private void changeToReportMenu(){
         this.viewManager.changeToReportMenu();
+        this.viewManager.setValuesToCurrentProcess();
     }
 
     private void changeToMenu(){
