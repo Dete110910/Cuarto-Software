@@ -10,6 +10,7 @@ import java.math.BigInteger;
 public class ViewManager extends JFrame {
 
     private PanelMenu panelMenu;
+    private PanelMenuPartitions panelMenuPartitions;
     private PanelMenuReport panelMenuReport;
     private PanelTable panelTable;
     private DialogCreateProcess dialogCreateProcess;
@@ -35,6 +36,8 @@ public class ViewManager extends JFrame {
 
         this.panelTable = new PanelTable();
         this.add(this.panelTable, BorderLayout.CENTER);
+
+        this.panelMenuPartitions = new PanelMenuPartitions(actionListener);
 
         this.panelMenuReport = new PanelMenuReport(actionListener);
 
@@ -108,14 +111,25 @@ public class ViewManager extends JFrame {
         return queueList;
     }
 
-    public void setValuesToPartitionsTable(Object[][] list){
-        DefaultTableModel defaultTableModel = new DefaultTableModel(list, ConstantsGUI.TABLE_HEADERS);
+    public void setValuesToPartitionsTableInCreatePartition(Object[][] list){
+        DefaultTableModel defaultTableModel = new DefaultTableModel(list, ConstantsGUI.PARTITIONS_TABLE_HEADERS);
         this.dialogContainerCreatePartitionAndTable.setTableProcess(defaultTableModel);
+    }
+
+    public void setValuesToPartitionsTableInCrud(Object[][] list){
+        DefaultTableModel defaultTableModel = new DefaultTableModel(list, ConstantsGUI.PARTITIONS_TABLE_HEADERS);
+        this.panelTable.setTableProcess(defaultTableModel);
     }
 
     public void hideCreateAndModifyProcessDialog(){
         this.dialogCreateProcess.setVisible(false);
         this.dialogCreateProcess.cleanAllFields();
+        SwingUtilities.updateComponentTreeUI(this);
+    }
+
+    public void changeToPartitionsMenu(){
+        this.remove(this.panelMenu);
+        this.add(this.panelMenuPartitions, BorderLayout.WEST);
         SwingUtilities.updateComponentTreeUI(this);
     }
 
@@ -125,8 +139,9 @@ public class ViewManager extends JFrame {
         SwingUtilities.updateComponentTreeUI(this);
     }
 
-    public void changeToMenu(){
+    public void changeToMainMenu(){
         this.remove(panelMenuReport);
+        this.remove(panelMenuPartitions);
         this.add(this.panelMenu, BorderLayout.WEST);
         SwingUtilities.updateComponentTreeUI(this);
     }

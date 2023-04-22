@@ -63,6 +63,7 @@ public class PanelCreatePartition extends JPanel {
         this.cancel.setPreferredSize(new Dimension(150, 35));
         Utilities.addComponent(this, cancel, 1, 3);
 
+
     }
 
     public String getPartitionName(){

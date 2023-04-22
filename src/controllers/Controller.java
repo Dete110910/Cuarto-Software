@@ -109,7 +109,7 @@ public class Controller implements ActionListener, KeyListener {
         }
         else {
             this.processManager.addPartition(partitionName, partitionSize);
-            this.viewManager.setValuesToPartitionsTable(processManager.getPartitionsListAsMatrixObject(processManager.getPartitions()));
+            this.viewManager.setValuesToPartitionsTableInCreatePartition(processManager.getPartitionsListAsMatrixObject(processManager.getPartitions()));
             this.viewManager.cleanFieldsPartitionDialog();
         }
     }
@@ -158,7 +158,8 @@ public class Controller implements ActionListener, KeyListener {
     }
 
     private void changeToPartitionsMenu(){
-
+        this.viewManager.setValuesToPartitionsTableInCrud(this.processManager.getPartitionsListAsMatrixObject(this.processManager.getPartitions()));
+        this.viewManager.changeToPartitionsMenu();
     }
 
     private void changeToReportMenu(){
@@ -166,7 +167,8 @@ public class Controller implements ActionListener, KeyListener {
     }
 
     private void changeToMenu(){
-        this.viewManager.changeToMenu();
+        this.viewManager.setValuesToTable(this.processManager.getProcessListAsMatrixObject(this.processManager.getInQueue()), "Procesos Existentes");
+        this.viewManager.changeToMainMenu();
     }
 
     private void openManual(){
