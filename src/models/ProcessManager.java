@@ -97,10 +97,22 @@ public class ProcessManager {
     }
 
     public ArrayList<Process> getInQueue() {
-        return inQueue;
+        return sortInQueueList();
     }
     public void addToInQueue(Process process){
-        this.inQueue.add(process);
+            this.inQueue.add(process);
+    }
+
+    public ArrayList<Process> sortInQueueList(){
+        ArrayList<Process> list = new ArrayList<>();
+        for (int j = 0; j < partitions.size(); j++) {
+            for (int i = 0; i < inQueue.size(); i++) {
+                if (inQueue.get(i).getPartition().getName().equals(partitions.get(j).getName())) {
+                    list.add(inQueue.get(i));
+                }
+            }
+        }
+        return list;
     }
 
     public int getPartitionsSize(){
@@ -190,7 +202,6 @@ public class ProcessManager {
     public void initSimulation(){
         this.copyToCurrentProcess();
         this.initLoadToReady();
-        this.initPartitions();
         for (int j = 0; j < partitions.size(); j++) {
             for (int i = 0; i < readyList.size(); i++) {
                 if (readyList.get(i).getPartition().getName().equals(partitions.get(j).getName())) {
@@ -228,7 +239,13 @@ public class ProcessManager {
     }
 
     public void copyToCurrentProcess(){
-        currentList.addAll(inQueue);
+        for (int j = 0; j < partitions.size(); j++) {
+            for (int i = 0; i < inQueue.size(); i++) {
+                if (inQueue.get(i).getPartition().getName().equals(partitions.get(j).getName())) {
+                    currentList.add(inQueue.get(i));
+                }
+            }
+        }
     }
 
     private void loadToReadyQueue(Process process) {
@@ -266,22 +283,22 @@ public class ProcessManager {
         this.inQueue.clear();
         this.readyList.clear();
         this.dispatchList.clear();
-        this.readyList.clear();
         this.executionList.clear();
-        this.readyList.clear();
         this.expirationList.clear();
         this.blockList.clear();
         this.wakeUpList.clear();
-        this.blockList.clear();
         this.finishedList.clear();
         this.noExecutionList.clear();
     }
-    private void initPartitions(){
-        System.out.println(partitions.toString());
-    }
 
     private void initLoadToReady() {
-        readyList.addAll(inQueue);
+        for (int j = 0; j < partitions.size(); j++) {
+            for (int i = 0; i < inQueue.size(); i++) {
+                if (inQueue.get(i).getPartition().getName().equals(partitions.get(j).getName())) {
+                    readyList.add(inQueue.get(i));
+                }
+            }
+        }
     }
     public void cleanQueueList(){
         inQueue.clear();
