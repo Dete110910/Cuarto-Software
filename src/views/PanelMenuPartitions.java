@@ -46,4 +46,5 @@ public class PanelMenuPartitions extends JPanel {
         Utilities.addComponent(this, this.back, 0, 4);
     }
 
+
 }

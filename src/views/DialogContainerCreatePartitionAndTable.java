@@ -81,4 +81,8 @@ public class DialogContainerCreatePartitionAndTable extends JDialog {
     public void changeButtonToModify() {
         this.panelCreatePartition.changeButtonToModify();
     }
+
+    public void changeTextToCRUD() {
+        this.panelCreatePartition.changeButtonText();
+    }
 }

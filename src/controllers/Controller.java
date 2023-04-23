@@ -269,6 +269,7 @@ public class Controller implements ActionListener, KeyListener {
 
     private void changeToPartitionsMenu(){
         this.viewManager.setPartitionsMenuActive(true);
+        this.viewManager.changeTextInPartitionsMenu();
         this.viewManager.setValuesToPartitionsTableInCrud(this.processManager.getPartitionsListAsMatrixObject(this.processManager.getPartitions()));
         this.viewManager.changeToPartitionsMenu();
     }
