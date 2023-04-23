@@ -11,6 +11,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.math.BigInteger;
+import java.util.ArrayList;
 
 public class Controller implements ActionListener, KeyListener {
 
@@ -357,10 +358,22 @@ public class Controller implements ActionListener, KeyListener {
         }
 
     }
+
+    private ArrayList<Process> sotReadyReport(){
+        ArrayList<Process> list = new ArrayList<>();
+        for (int j = 0; j < processManager.getPartitions().size(); j++) {
+            for (int i = 0; i < processManager.getReadyList().size(); i++) {
+                if (processManager.getReadyList().get(i).getPartition().getName().equals(processManager.getPartitions().get(j).getName())) {
+                    list.add(processManager.getReadyList().get(i));
+                }
+            }
+        }
+        return list;
+    }
     private void loadReportList(){
         viewManager.setCurrentList(processManager.getProcessListAsMatrixObject(processManager.getCurrentList()));
         viewManager.setInQueueList(processManager.getProcessListAsMatrixObject(processManager.getInQueue()));
-        viewManager.setReadyList(processManager.getProcessListAsMatrixObject(processManager.getReadyList()));
+        viewManager.setReadyList(processManager.getProcessListAsMatrixObject(this.sotReadyReport()));
         viewManager.setDispatchList(processManager.getProcessListAsMatrixObject(processManager.getDispatchList()));
         viewManager.setExecutionList(processManager.getProcessListAsMatrixObject(processManager.getExecutionList()));
         viewManager.setExpirationList(processManager.getProcessListAsMatrixObject(processManager.getExpirationList()));
