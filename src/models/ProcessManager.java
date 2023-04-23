@@ -247,6 +247,15 @@ public class ProcessManager {
             }
         }
     }
+    private void initLoadToReady() {
+        for (int j = 0; j < partitions.size(); j++) {
+            for (int i = 0; i < inQueue.size(); i++) {
+                if (inQueue.get(i).getPartition().getName().equals(partitions.get(j).getName())) {
+                    readyList.add(inQueue.get(i));
+                }
+            }
+        }
+    }
 
     private void loadToReadyQueue(Process process) {
         this.readyList.add(process);
@@ -291,15 +300,7 @@ public class ProcessManager {
         this.noExecutionList.clear();
     }
 
-    private void initLoadToReady() {
-        for (int j = 0; j < partitions.size(); j++) {
-            for (int i = 0; i < inQueue.size(); i++) {
-                if (inQueue.get(i).getPartition().getName().equals(partitions.get(j).getName())) {
-                    readyList.add(inQueue.get(i));
-                }
-            }
-        }
-    }
+
     public void cleanQueueList(){
         inQueue.clear();
     }
