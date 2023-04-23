@@ -279,4 +279,7 @@ public class ViewManager extends JFrame {
         this.setValuesToTable(this.noExecutionList, "Procesos No Ejecutados");
     }
 
+    public void changeTextInPartitionsMenu() {
+        this.dialogContainerCreatePartitionAndTable.changeTextToCRUD();
+    }
 }
